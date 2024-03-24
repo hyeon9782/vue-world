@@ -1,7 +1,8 @@
-<template lang="">
+<template>
   <footer></footer>
 </template>
-<script>
-export default {}
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({})
 </script>
-<style lang=""></style>
+<style scoped></style>
