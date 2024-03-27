@@ -10,6 +10,8 @@ const getFollowArticles = () => {
 }
 
 const getArticle = (slug: string) => {
+  console.log('api')
+
   return instance.get(`/articles/${slug}`)
 }
 

@@ -4,7 +4,7 @@
       <UserBox :profile="article.author" :createdAt="article.createdAt" />
       <FavoriteButton :favorited="article.favorited" :favoritesCount="article.favoritesCount" />
     </div>
-    <RouterLink to="/article/how-to-build-webapps-that-scale" class="preview-link">
+    <RouterLink :to="`/article/${article.slug}`" class="preview-link">
       <h1>{{ article.title }}</h1>
       <p>{{ article.description }}</p>
       <span>Read more...</span>
