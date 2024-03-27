@@ -1,0 +1,13 @@
+<template>
+  <button class="btn btn-sm btn-outline-secondary">
+    <i class="ion-plus-round"></i>
+    &nbsp; Follow Eric Simons <span class="counter">(10)</span>
+  </button>
+</template>
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+  props: {}
+})
+</script>
+<style lang=""></style>

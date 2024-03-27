@@ -6,27 +6,20 @@
           <h1>{{ article.title }}</h1>
 
           <div class="article-meta">
-            <!-- <UserBox :profile="article.author" /> -->
-            <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
-            <div class="info">
-              <a href="/profile/eric-simons" class="author">Eric Simons</a>
-              <span class="date">January 20th</span>
-            </div>
-            <button class="btn btn-sm btn-outline-secondary">
-              <i class="ion-plus-round"></i>
-              &nbsp; Follow Eric Simons <span class="counter">(10)</span>
-            </button>
-            &nbsp;&nbsp;
-            <button class="btn btn-sm btn-outline-primary">
-              <i class="ion-heart"></i>
-              &nbsp; Favorite Post <span class="counter">(29)</span>
-            </button>
-            <button class="btn btn-sm btn-outline-secondary">
-              <i class="ion-edit"></i> Edit Article
-            </button>
-            <button class="btn btn-sm btn-outline-danger">
-              <i class="ion-trash-a"></i> Delete Article
-            </button>
+            <UserBox :profile="article.author" :createdAt="article.createdAt" />
+            <template v-if="article.author.username !== 'hyeon9782'">
+              <FollowButton />
+              &nbsp;&nbsp;
+              <FavoriteButtonVue />
+            </template>
+            <template v-else>
+              <button class="btn btn-sm btn-outline-secondary">
+                <i class="ion-edit"></i> Edit Article
+              </button>
+              <button class="btn btn-sm btn-outline-danger">
+                <i class="ion-trash-a"></i> Delete Article
+              </button>
+            </template>
           </div>
         </div>
       </div>
@@ -51,27 +44,20 @@
         <hr />
         <div class="article-actions">
           <div class="article-meta">
-            <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
-            <div class="info">
-              <a href="" class="author">Eric Simons</a>
-              <span class="date">January 20th</span>
-            </div>
-
-            <button class="btn btn-sm btn-outline-secondary">
-              <i class="ion-plus-round"></i>
-              &nbsp; Follow Eric Simons
-            </button>
-            &nbsp;
-            <button class="btn btn-sm btn-outline-primary">
-              <i class="ion-heart"></i>
-              &nbsp; Favorite Article <span class="counter">(29)</span>
-            </button>
-            <button class="btn btn-sm btn-outline-secondary">
-              <i class="ion-edit"></i> Edit Article
-            </button>
-            <button class="btn btn-sm btn-outline-danger">
-              <i class="ion-trash-a"></i> Delete Article
-            </button>
+            <UserBox :profile="article.author" :createdAt="article.createdAt" />
+            <template v-if="article.author.username !== 'hyeon9782'">
+              <FollowButton />
+              &nbsp;&nbsp;
+              <FavoriteButtonVue />
+            </template>
+            <template v-else>
+              <button class="btn btn-sm btn-outline-secondary">
+                <i class="ion-edit"></i> Edit Article
+              </button>
+              <button class="btn btn-sm btn-outline-danger">
+                <i class="ion-trash-a"></i> Delete Article
+              </button>
+            </template>
           </div>
         </div>
 
@@ -88,12 +74,14 @@
 <script lang="ts">
 import CommentItem from '@/components/comments/CommentItem.vue'
 import CommentForm from '@/components/comments/CommentForm.vue'
+import FollowButton from '@/components/user/FollowButton.vue'
 import UserBox from '@/components/user/UserBox.vue'
 import { defineComponent } from 'vue'
 import { getComments } from '@/api/comment'
 import { getArticle } from '@/api/articles'
+import FavoriteButtonVue from '@/components/user/FavoriteButton.vue'
 export default defineComponent({
-  components: { CommentItem, CommentForm, UserBox },
+  components: { CommentItem, CommentForm, UserBox, FollowButton, FavoriteButtonVue },
   data() {
     return {
       article: {},
@@ -117,7 +105,7 @@ export default defineComponent({
       this.comments = comments
     }
   },
-  mounted() {
+  created() {
     this.fetchArticle()
     this.fetchComments()
   }

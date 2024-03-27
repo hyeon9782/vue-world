@@ -49,7 +49,7 @@ export default defineComponent({
       this.articles = articles
     }
   },
-  mounted() {
+  created() {
     this.fetchArticles()
   }
 })

@@ -1,7 +1,7 @@
 <template lang="">
-  <RouterLink to="/profile/eric-simons"><img :src="profile.image" /></RouterLink>
+  <RouterLink :to="`/profile/${profile?.username}`"><img :src="profile?.image" /></RouterLink>
   <div class="info">
-    <RouterLink to="/profile/eric-simons" class="author">{{ profile.username }}</RouterLink>
+    <RouterLink to="/profile/eric-simons" class="author">{{ profile?.username }}</RouterLink>
     <span class="date">{{ createdAt }}</span>
   </div>
 </template>
