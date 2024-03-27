@@ -2,9 +2,7 @@
   <div class="article-preview">
     <div class="article-meta">
       <UserBox :profile="article.author" :createdAt="article.createdAt" />
-      <button class="btn btn-outline-primary btn-sm pull-xs-right">
-        <i class="ion-heart"></i> 29
-      </button>
+      <FavoriteButton :favorited="article.favorited" :favoritesCount="article.favoritesCount" />
     </div>
     <RouterLink to="/article/how-to-build-webapps-that-scale" class="preview-link">
       <h1>{{ article.title }}</h1>
@@ -27,10 +25,12 @@ import type { Article } from 'types/article'
 import { defineComponent, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
 import UserBox from '@/components/user/UserBox.vue'
+import FavoriteButton from '@/components/favorites/FavoriteButton.vue'
 export default defineComponent({
   components: {
     RouterLink,
-    UserBox
+    UserBox,
+    FavoriteButton
   },
   props: {
     article: {
