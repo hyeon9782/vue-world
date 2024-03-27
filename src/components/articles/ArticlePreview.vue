@@ -1,13 +1,7 @@
 <template>
   <div class="article-preview">
     <div class="article-meta">
-      <RouterLink to="/profile/eric-simons"
-        ><img src="http://i.imgur.com/Qr71crq.jpg"
-      /></RouterLink>
-      <div class="info">
-        <RouterLink to="/profile/eric-simons" class="author">Eric Simons</RouterLink>
-        <span class="date">January 20th</span>
-      </div>
+      <UserBox :profile="article.author" :createdAt="article.createdAt" />
       <button class="btn btn-outline-primary btn-sm pull-xs-right">
         <i class="ion-heart"></i> 29
       </button>
@@ -32,9 +26,11 @@
 import type { Article } from 'types/article'
 import { defineComponent, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
+import UserBox from '@/components/user/UserBox.vue'
 export default defineComponent({
   components: {
-    RouterLink
+    RouterLink,
+    UserBox
   },
   props: {
     article: {
