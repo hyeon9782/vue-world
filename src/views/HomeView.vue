@@ -1,9 +1,3 @@
-<script lang="ts">
-import ArticlePreview from '@/components/articles/ArticlePreview.vue'
-import { defineComponent } from 'vue'
-export default defineComponent({ components: { ArticlePreview } })
-</script>
-
 <template>
   <main>
     <div class="home-page">
@@ -27,8 +21,8 @@ export default defineComponent({ components: { ArticlePreview } })
                 </li>
               </ul>
             </div>
-            <ArticlePreview />
-            <ArticlePreview />
+
+            <ArticlePreview v-for="article in articles" :key="article.slug" :article="article" />
 
             <ul class="pagination">
               <li class="page-item active">
@@ -41,25 +35,38 @@ export default defineComponent({ components: { ArticlePreview } })
           </div>
 
           <div class="col-md-3">
-            <div class="sidebar">
-              <p>Popular Tags</p>
-
-              <div class="tag-list">
-                <a href="" class="tag-pill tag-default">programming</a>
-                <a href="" class="tag-pill tag-default">javascript</a>
-                <a href="" class="tag-pill tag-default">emberjs</a>
-                <a href="" class="tag-pill tag-default">angularjs</a>
-                <a href="" class="tag-pill tag-default">react</a>
-                <a href="" class="tag-pill tag-default">mean</a>
-                <a href="" class="tag-pill tag-default">node</a>
-                <a href="" class="tag-pill tag-default">rails</a>
-              </div>
-            </div>
+            <SideBarVue />
           </div>
         </div>
       </div>
     </div>
   </main>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import ArticlePreview from '@/components/articles/ArticlePreview.vue'
+import { getArticles } from '@/api/articles'
+import SideBarVue from '@/components/layout/SideBar.vue'
+
+export default defineComponent({
+  components: { ArticlePreview, SideBarVue },
+  data() {
+    return {
+      articles: []
+    }
+  },
+  methods: {
+    async fetchArticles() {
+      const response = await getArticles()
+      const articles = response.data.articles
+      this.articles = articles
+    }
+  },
+  mounted() {
+    this.fetchArticles()
+  }
+})
+</script>
 
 <style scoped></style>
