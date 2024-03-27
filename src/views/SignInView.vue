@@ -6,7 +6,7 @@
           <div class="col-md-6 offset-md-3 col-xs-12">
             <h1 class="text-xs-center">Sign in</h1>
             <p class="text-xs-center">
-              <a href="/register">Need an account?</a>
+              <RouterLink to="/register">Need an account?</RouterLink>
             </p>
 
             <ul class="error-messages">
@@ -15,14 +15,10 @@
 
             <form>
               <fieldset class="form-group">
-                <input class="form-control form-control-lg" type="text" placeholder="Email" />
+                <VueInput type="text" placeholder="Email" />
               </fieldset>
               <fieldset class="form-group">
-                <input
-                  class="form-control form-control-lg"
-                  type="password"
-                  placeholder="Password"
-                />
+                <VueInput type="password" placeholder="Password" />
               </fieldset>
               <button class="btn btn-lg btn-primary pull-xs-right">Sign in</button>
             </form>
@@ -34,6 +30,13 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-export default defineComponent({})
+import { RouterLink } from 'vue-router'
+import VueInput from '@/components/common/VueInput.vue'
+export default defineComponent({
+  components: {
+    RouterLink,
+    VueInput
+  }
+})
 </script>
 <style scoped></style>

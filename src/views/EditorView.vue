@@ -11,28 +11,22 @@
             <form>
               <fieldset>
                 <fieldset class="form-group">
-                  <input
-                    type="text"
-                    class="form-control form-control-lg"
-                    placeholder="Article Title"
-                  />
+                  <VueInput type="text" placeholder="Article Title" />
                 </fieldset>
                 <fieldset class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="What's this article about?"
-                  />
+                  <!-- class form-control로 변경 (작은 사이즈)-->
+                  <VueInput type="text" placeholder="What's this article about?" />
                 </fieldset>
                 <fieldset class="form-group">
-                  <textarea
+                  <VueTextarea
                     class="form-control"
                     rows="8"
                     placeholder="Write your article (in markdown)"
-                  ></textarea>
+                  ></VueTextarea>
                 </fieldset>
                 <fieldset class="form-group">
-                  <input type="text" class="form-control" placeholder="Enter tags" />
+                  <!-- class form-control로 변경 (작은 사이즈)-->
+                  <VueInput type="text" placeholder="Enter tags" />
                   <div class="tag-list">
                     <span class="tag-default tag-pill"> <i class="ion-close-round"></i> tag </span>
                   </div>
@@ -50,6 +44,10 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-export default defineComponent({})
+import VueInput from '@/components/common/VueInput.vue'
+import VueTextarea from '@/components/common/VueTextarea.vue'
+export default defineComponent({
+  components: { VueInput, VueTextarea }
+})
 </script>
 <style scoped></style>

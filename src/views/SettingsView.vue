@@ -13,27 +13,23 @@
             <form>
               <fieldset>
                 <fieldset class="form-group">
-                  <input class="form-control" type="text" placeholder="URL of profile picture" />
+                  <VueInput type="text" placeholder="URL of profile picture" />
                 </fieldset>
                 <fieldset class="form-group">
-                  <input class="form-control form-control-lg" type="text" placeholder="Your Name" />
+                  <VueInput type="text" placeholder="Your Name" />
                 </fieldset>
                 <fieldset class="form-group">
-                  <textarea
+                  <VueTextarea
                     class="form-control form-control-lg"
                     rows="8"
                     placeholder="Short bio about you"
-                  ></textarea>
+                  ></VueTextarea>
                 </fieldset>
                 <fieldset class="form-group">
-                  <input class="form-control form-control-lg" type="text" placeholder="Email" />
+                  <VueInput type="text" placeholder="Email" />
                 </fieldset>
                 <fieldset class="form-group">
-                  <input
-                    class="form-control form-control-lg"
-                    type="password"
-                    placeholder="New Password"
-                  />
+                  <VueInput type="password" placeholder="New Password" />
                 </fieldset>
                 <button class="btn btn-lg btn-primary pull-xs-right">Update Settings</button>
               </fieldset>
@@ -48,6 +44,13 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-export default defineComponent({})
+import VueInput from '@/components/common/VueInput.vue'
+import VueTextarea from '@/components/common/VueTextarea.vue'
+export default defineComponent({
+  components: {
+    VueInput,
+    VueTextarea
+  }
+})
 </script>
 <style scoped></style>
