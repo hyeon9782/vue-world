@@ -2,7 +2,8 @@ import {
   getArticles,
   getArticlesWithAuthor,
   getArticlesWithFavorited,
-  getArticlesWithTag
+  getArticlesWithTag,
+  getFollowArticles
 } from '@/api/articles'
 import { defineStore } from 'pinia'
 import type { Article } from 'types/article'
@@ -11,12 +12,14 @@ type Payload = {
   tag: string
   favorited: string
   author: string
-  type: string
+  type: Type
 }
+
+type Type = 'basic' | 'feed' | 'tag' | 'author' | 'favorited'
 
 export const useArticlesStore = defineStore('articles', {
   state: () => {
-    return { articles: [] as Article[] }
+    return { articles: [] as Article[], type: 'basic' as Type }
   },
   getters: {},
   actions: {
@@ -30,6 +33,9 @@ export const useArticlesStore = defineStore('articles', {
         case 'basic':
           response = await getArticles()
           break
+        case 'feed':
+          response = await getFollowArticles()
+          break
         case 'tag':
           response = await getArticlesWithTag(tag)
           break
@@ -42,6 +48,7 @@ export const useArticlesStore = defineStore('articles', {
       }
 
       const articles = response.data.articles
+      this.type = type
       this.articles = articles
     }
   }

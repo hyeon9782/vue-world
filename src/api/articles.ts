@@ -21,13 +21,11 @@ const getArticlesWithFavorited = (username: string, offset = 0, limit = 10) => {
   )
 }
 
-const getFollowArticles = () => {
-  return instance.get('/articles/feed')
+const getFollowArticles = (offset = 0, limit = 10) => {
+  return instance.get(`/articles/feed?limit=${limit}&offset=${offset ? offset * limit : 0}`)
 }
 
 const getArticle = (slug: string) => {
-  console.log('api')
-
   return instance.get(`/articles/${slug}`)
 }
 

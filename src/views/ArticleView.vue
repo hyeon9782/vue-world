@@ -7,7 +7,7 @@
 
           <div class="article-meta">
             <UserBox :profile="article.author" :createdAt="article.createdAt" />
-            <template v-if="article.author.username !== 'hyeon9782'">
+            <template v-if="article.author.username !== user.username">
               <FollowButton />
               &nbsp;&nbsp;
               <FavoriteButtonVue />
@@ -45,7 +45,7 @@
         <div class="article-actions">
           <div class="article-meta">
             <UserBox :profile="article.author" :createdAt="article.createdAt" />
-            <template v-if="article.author.username !== 'hyeon9782'">
+            <template v-if="article.author.username !== user.username">
               <FollowButton />
               &nbsp;&nbsp;
               <FavoriteButtonVue />
@@ -80,6 +80,8 @@ import { defineComponent } from 'vue'
 import { getComments } from '@/api/comment'
 import { getArticle } from '@/api/articles'
 import FavoriteButtonVue from '@/components/user/FavoriteButton.vue'
+import { mapState } from 'pinia'
+import { useUserStore } from '@/stores/user'
 export default defineComponent({
   components: { CommentItem, CommentForm, UserBox, FollowButton, FavoriteButtonVue },
   data() {
@@ -93,7 +95,6 @@ export default defineComponent({
       const slug = this.$route.params.slug
       const response = await getArticle(slug)
       const article = response?.data?.article
-      console.log(article)
 
       this.article = article
     },
@@ -101,9 +102,12 @@ export default defineComponent({
       const slug = this.$route.params.slug
       const response = await getComments(slug)
       const comments = response.data.comments
-      console.log(comments)
+
       this.comments = comments
     }
+  },
+  computed: {
+    ...mapState(useUserStore, ['user'])
   },
   created() {
     this.fetchArticle()

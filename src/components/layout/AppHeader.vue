@@ -55,7 +55,6 @@ export default defineComponent({
   },
   created() {
     const user = localStorage.getItem('user')
-    console.log(user)
 
     if (user) {
       this.updateUser(JSON.parse(user))
