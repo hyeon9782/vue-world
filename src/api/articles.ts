@@ -1,8 +1,24 @@
 import { instance } from './common/instance'
 import type { NewArticle, UpdateArticle } from 'types/article'
 
-const getArticles = () => {
-  return instance.get('/articles')
+const getArticles = (offset = 0, limit = 10) => {
+  return instance.get(`/articles?limit=${limit}&offset=${offset ? offset * limit : 0}`)
+}
+
+const getArticlesWithTag = (tag: string, offset = 0, limit = 10) => {
+  return instance.get(`/articles?tag=${tag}&limit=${limit}&offset=${offset ? offset * limit : 0}`)
+}
+
+const getArticlesWithAuthor = (username: string, offset = 0, limit = 10) => {
+  return instance.get(
+    `/articles?author=${username}&limit=${limit}&offset=${offset ? offset * limit : 0}`
+  )
+}
+
+const getArticlesWithFavorited = (username: string, offset = 0, limit = 10) => {
+  return instance.get(
+    `/articles?favorited=${username}&limit=${limit}&offset=${offset ? offset * limit : 0}`
+  )
 }
 
 const getFollowArticles = () => {
@@ -27,4 +43,14 @@ const deleteArticle = (slug: string) => {
   return instance.delete(`/articles/${slug}`)
 }
 
-export { getArticles, getFollowArticles, getArticle, createArticle, updateArticle, deleteArticle }
+export {
+  getArticles,
+  getArticlesWithTag,
+  getArticlesWithAuthor,
+  getArticlesWithFavorited,
+  getFollowArticles,
+  getArticle,
+  createArticle,
+  updateArticle,
+  deleteArticle
+}

@@ -45,7 +45,7 @@ export default defineComponent({
     ...mapState(useArticlesStore, ['articles'])
   },
   created() {
-    this.fetchArticles()
+    this.fetchArticles({ type: 'basic' })
   }
 })
 </script>
