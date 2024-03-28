@@ -1,8 +1,7 @@
 <template>
-  <textarea name="" id="" cols="30" rows="10"></textarea>
+  <textarea name="" id="" cols="30" rows="10" v-model="model"></textarea>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({})
+<script setup lang="ts">
+const model = defineModel()
 </script>
 <style lang=""></style>

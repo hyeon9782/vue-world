@@ -48,6 +48,9 @@ export default defineComponent({
       }
     }
   },
+  created() {
+    this.parseRoute()
+  },
   computed: {
     ...mapState(useArticlesStore, ['type']),
     ...mapState(useUserStore, ['user'])

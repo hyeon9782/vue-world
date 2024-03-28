@@ -30,11 +30,11 @@ const getArticle = (slug: string) => {
 }
 
 const createArticle = (article: NewArticle) => {
-  return instance.post('/articles', article)
+  return instance.post('/articles', { article })
 }
 
 const updateArticle = (slug: string, article: UpdateArticle) => {
-  return instance.put(`/articles/${slug}`, article)
+  return instance.put(`/articles/${slug}`, { article })
 }
 
 const deleteArticle = (slug: string) => {
