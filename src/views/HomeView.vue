@@ -32,22 +32,17 @@ import { defineComponent } from 'vue'
 import ArticlePreview from '@/components/articles/ArticlePreview.vue'
 import ArticleToggle from '@/components/articles/ArticleToggle.vue'
 import Banner from '@/components/home/Banner.vue'
-import { getArticles } from '@/api/articles'
 import SideBarVue from '@/components/layout/SideBar.vue'
+import { useArticlesStore } from '@/stores/articles'
+import { mapActions, mapState } from 'pinia'
 
 export default defineComponent({
   components: { ArticlePreview, SideBarVue, Banner, ArticleToggle },
-  data() {
-    return {
-      articles: []
-    }
-  },
   methods: {
-    async fetchArticles() {
-      const response = await getArticles()
-      const articles = response.data.articles
-      this.articles = articles
-    }
+    ...mapActions(useArticlesStore, ['fetchArticles'])
+  },
+  computed: {
+    ...mapState(useArticlesStore, ['articles'])
   },
   created() {
     this.fetchArticles()
