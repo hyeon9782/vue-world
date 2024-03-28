@@ -27,8 +27,8 @@
               </RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/profile/eric-simons">
-                <img src="" class="user-pic" />
+              <RouterLink class="nav-link" :to="`/profile/${user.username}`">
+                <img :src="user.image" class="user-pic" />
                 {{ user.username }}
               </RouterLink>
             </li>
