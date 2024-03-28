@@ -13,15 +13,15 @@
               <li>That email is already taken</li>
             </ul>
 
-            <form>
+            <form @submit="signUpUser">
               <fieldset class="form-group">
-                <VueInput type="text" placeholder="Username" />
+                <VueInput type="text" placeholder="Username" v-model="username" />
               </fieldset>
               <fieldset class="form-group">
-                <VueInput type="text" placeholder="Email" />
+                <VueInput type="text" placeholder="Email" v-model="email" />
               </fieldset>
               <fieldset class="form-group">
-                <VueInput type="password" placeholder="Password" />
+                <VueInput type="password" placeholder="Password" v-model="password" />
               </fieldset>
               <button class="btn btn-lg btn-primary pull-xs-right">Sign up</button>
             </form>
@@ -36,12 +36,45 @@ import { defineComponent } from 'vue'
 import { RouterLink } from 'vue-router'
 import VueInput from '@/components/common/VueInput.vue'
 import VueButton from '@/components/common/VueButton.vue'
+import { signUp } from '@/api/user'
 export default defineComponent({
   components: {
     RouterLink,
     VueInput,
     VueButton
+  },
+  data() {
+    return {
+      username: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    async signUpUser(e: Event) {
+      e.preventDefault()
+
+      try {
+        const response = await signUp({
+          username: this.username,
+          email: this.email,
+          password: this.password
+        })
+        console.log(response)
+        this.$router.push('/login')
+      } catch (error) {
+        // 에러 메세지에 따라 에러 핸들링 추가
+        console.log(error)
+      }
+    }
   }
 })
 </script>
 <style scoped></style>
+
+<!-- 
+
+1. API 에러처리
+2. Form 유효성 검증
+
+-->

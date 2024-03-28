@@ -1,8 +1,7 @@
 <template>
-  <input class="form-control form-control-lg" />
+  <input class="form-control form-control-lg" v-model="model" />
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({})
+<script setup lang="ts">
+const model = defineModel()
 </script>
 <style lang=""></style>
