@@ -13,12 +13,12 @@
               <li>That email is already taken</li>
             </ul>
 
-            <form>
+            <form @submit="signInUser">
               <fieldset class="form-group">
-                <VueInput type="text" placeholder="Email" />
+                <VueInput type="text" placeholder="Email" v-model="email" />
               </fieldset>
               <fieldset class="form-group">
-                <VueInput type="password" placeholder="Password" />
+                <VueInput type="password" placeholder="Password" v-model="password" />
               </fieldset>
               <button class="btn btn-lg btn-primary pull-xs-right">Sign in</button>
             </form>
@@ -32,11 +32,45 @@
 import { defineComponent } from 'vue'
 import { RouterLink } from 'vue-router'
 import VueInput from '@/components/common/VueInput.vue'
+import { signIn } from '@/api/user'
+import { mapActions } from 'pinia'
+import { useUserStore } from '@/stores/user'
 export default defineComponent({
   components: {
     RouterLink,
     VueInput
+  },
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    ...mapActions(useUserStore, ['updateUser']),
+    async signInUser(e: Event) {
+      e.preventDefault()
+      try {
+        const response = await signIn({
+          email: this.email,
+          password: this.password
+        })
+        console.log(response)
+        this.updateUser(response.data.user)
+        this.$router.push('/')
+      } catch (error) {
+        // 에러 핸들링 부분 추가
+        console.log(error)
+      }
+    }
   }
 })
 </script>
 <style scoped></style>
+
+<!-- 
+
+1. API 에러처리
+2. Form 유효성 검증
+
+-->
