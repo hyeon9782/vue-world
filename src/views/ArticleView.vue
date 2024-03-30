@@ -16,7 +16,7 @@
               <button class="btn btn-sm btn-outline-secondary">
                 <i class="ion-edit"></i> Edit Article
               </button>
-              <button class="btn btn-sm btn-outline-danger">
+              <button class="btn btn-sm btn-outline-danger" @click="removeArticle">
                 <i class="ion-trash-a"></i> Delete Article
               </button>
             </template>
@@ -82,6 +82,7 @@ import { getArticle } from '@/api/articles'
 import FavoriteButtonVue from '@/components/user/FavoriteButton.vue'
 import { mapState } from 'pinia'
 import { useUserStore } from '@/stores/user'
+import { deleteArticle } from '@/api/articles'
 export default defineComponent({
   components: { CommentItem, CommentForm, UserBox, FollowButton, FavoriteButtonVue },
   data() {
@@ -92,18 +93,39 @@ export default defineComponent({
   },
   methods: {
     async fetchArticle() {
-      const slug = this.$route.params.slug
-      const response = await getArticle(slug)
-      const article = response?.data?.article
+      try {
+        const slug = this.$route.params.slug
+        const response = await getArticle(slug)
+        const article = response?.data?.article
 
-      this.article = article
+        this.article = article
+      } catch (error) {
+        // Error 처리 추가
+        console.log(error)
+      }
     },
     async fetchComments() {
-      const slug = this.$route.params.slug
-      const response = await getComments(slug)
-      const comments = response.data.comments
+      try {
+        const slug = this.$route.params.slug
+        const response = await getComments(slug)
+        const comments = response.data.comments
 
-      this.comments = comments
+        this.comments = comments
+      } catch (error) {
+        // Error 처리 추가
+        console.log(error)
+      }
+    },
+    async removeArticle() {
+      try {
+        const slug = this.$route.params.slug
+        const response = await deleteArticle(slug)
+        console.log(response)
+        this.$router.push('/')
+      } catch (error) {
+        // Error 처리 추가
+        console.log(error)
+      }
     }
   },
   computed: {
