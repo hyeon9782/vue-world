@@ -2,7 +2,11 @@
   <div class="article-preview">
     <div class="article-meta">
       <UserBox :profile="article.author" :createdAt="article.createdAt" />
-      <FavoriteButton :favorited="article.favorited" :favoritesCount="article.favoritesCount" />
+      <FavoriteButton
+        :favorited="article.favorited"
+        :favoritesCount="article.favoritesCount"
+        :slug="article.slug"
+      />
     </div>
     <RouterLink :to="`/article/${article.slug}`" class="preview-link">
       <h1>{{ article.title }}</h1>
@@ -26,6 +30,7 @@ import { defineComponent, type PropType } from 'vue'
 import { RouterLink } from 'vue-router'
 import UserBox from '@/components/user/UserBox.vue'
 import FavoriteButton from '@/components/favorites/FavoriteButton.vue'
+
 export default defineComponent({
   components: {
     RouterLink,
