@@ -63,8 +63,14 @@
 
         <div class="row">
           <div class="col-xs-12 col-md-8 offset-md-2">
-            <CommentForm />
-            <CommentItem />
+            <CommentForm :user="user" />
+
+            <CommentItem
+              v-for="comment in comments"
+              :key="comment.id"
+              :comment="comment"
+              :user="user"
+            />
           </div>
         </div>
       </div>
@@ -83,11 +89,12 @@ import FavoriteButtonVue from '@/components/user/FavoriteButton.vue'
 import { mapState } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { deleteArticle } from '@/api/articles'
+import type { Article } from '@/types/article'
 export default defineComponent({
   components: { CommentItem, CommentForm, UserBox, FollowButton, FavoriteButtonVue },
   data() {
     return {
-      article: {},
+      article: {} as Article,
       comments: []
     }
   },

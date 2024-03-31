@@ -6,7 +6,7 @@ const getComments = (slug: string) => {
 }
 
 const createComment = (slug: string, comment: NewComment) => {
-  return instance.post(`/articles/${slug}/comments`, comment)
+  return instance.post(`/articles/${slug}/comments`, { comment })
 }
 
 const deleteComment = (slug: string, id: string) => {
