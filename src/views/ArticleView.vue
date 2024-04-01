@@ -45,8 +45,15 @@
         <div class="article-actions">
           <div class="article-meta">
             <UserBox :profile="article.author" :createdAt="article.createdAt" />
+
             <template v-if="article.author.username !== user.username">
-              <FollowButton />
+              <template v-if="article.author.username">
+                <FollowButton
+                  :profile="article.author"
+                  :username="article.author.username"
+                  :following="article.author.following"
+              /></template>
+
               &nbsp;&nbsp;
               <FavoriteButtonVue />
             </template>
@@ -106,6 +113,9 @@ export default defineComponent({
         const article = response?.data?.article
 
         this.article = article
+        console.log(article)
+        console.log(article.author)
+        console.log(article.author.username)
       } catch (error) {
         // Error 처리 추가
         console.log(error)

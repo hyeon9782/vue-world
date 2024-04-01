@@ -5,11 +5,11 @@ const getProfile = (username: string) => {
 }
 
 const followUser = (username: string) => {
-  return instance.post(`/profiles/${username}`)
+  return instance.post(`/profiles/${username}/follow`)
 }
 
 const unFollowUser = (username: string) => {
-  return instance.delete(`/profiles/${username}`)
+  return instance.delete(`/profiles/${username}/follow`)
 }
 
 export { getProfile, followUser, unFollowUser }
